@@ -5,9 +5,9 @@
 		onLaunch: function() {
 		},
 		onShow: function() {
-			
 		},
-		onHide: function() {},
+		onHide: function() {
+		},
 		watch: {
 			loading(newValue) {
 				if(newValue) {

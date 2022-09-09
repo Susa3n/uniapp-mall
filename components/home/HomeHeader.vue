@@ -1,5 +1,8 @@
 <template>
 	<view class="container">
+		<view style="margin-bottom: 10rpx;">
+			<SearchInput></SearchInput>
+		</view>
 		<view>
 			<swiper indicator-dots autoplay circular :interval="1500">
 				<swiper-item v-for="(item,index) in bundleList" :key="item.goods_id">
@@ -40,6 +43,7 @@
 </template>
 
 <script>
+	import SearchInput from '@/components/home/searchInput.vue'
 	import {
 		getBundleList,getNavList
 	} from '@/api/home/index.js'
@@ -50,6 +54,9 @@
 				bundleList: [],
 				navList: []
 			}
+		},
+		components: {
+			SearchInput
 		},
 		mounted() {
 			this.getBundleList()

@@ -12,7 +12,7 @@
 			loading(newValue) {
 				if(newValue) {
 					uni.showLoading({
-						title: '加载中'
+						title: '加载中...'
 					});
 				}else{
 					uni.hideLoading();
@@ -26,6 +26,6 @@
 </script>
 
 <style>
-	@import url('./static/fonts/iconfont.css');
+	@import url('@/static/fonts/iconfont.css');
 	/*每个页面公共css */
 </style>

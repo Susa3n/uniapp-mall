@@ -106,7 +106,7 @@ var _vuex = __webpack_require__(/*! vuex */ 9);function ownKeys(object, enumerab
     loading: function loading(newValue) {
       if (newValue) {
         uni.showLoading({
-          title: '加载中' });
+          title: '加载中...' });
 
       } else {
         uni.hideLoading();

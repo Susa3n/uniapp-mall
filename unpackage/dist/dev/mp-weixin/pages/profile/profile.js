@@ -130,23 +130,19 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-
-
-
-
-
-
-var _hooks = _interopRequireDefault(__webpack_require__(/*! @/mixins/hooks.js */ 95));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
 //
 //
-var _default = { data: function data() {return {};},
+var _default =
+{
+  data: function data() {
+    return {};
 
-  mixins: [_hooks.default],
 
+  },
   methods: {} };exports.default = _default;
 
 /***/ })

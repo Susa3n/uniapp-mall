@@ -10635,142 +10635,8 @@ function initRouter() {
 /* 24 */,
 /* 25 */,
 /* 26 */,
-/* 27 */
-/*!****************************************************************************************!*\
-  !*** C:/Users/Sprite Master/Documents/HBuilderProjects/hello-uniapp/api/home/index.js ***!
-  \****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.getBundleList = getBundleList;var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request.js */ 28));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-function getBundleList() {
-  return _request.default.get('home/swiperdata');
-}
-
-// export default {getBundleList}
-
-/***/ }),
-/* 28 */
-/*!***************************************************************************************!*\
-  !*** C:/Users/Sprite Master/Documents/HBuilderProjects/hello-uniapp/utils/request.js ***!
-  \***************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ 29));
-var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index.js */ 13));
-var types = _interopRequireWildcard(__webpack_require__(/*! @/store/types.js */ 19));function _getRequireWildcardCache() {if (typeof WeakMap !== "function") return null;var cache = new WeakMap();_getRequireWildcardCache = function _getRequireWildcardCache() {return cache;};return cache;}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;}if (obj === null || typeof obj !== "object" && typeof obj !== "function") {return { default: obj };}var cache = _getRequireWildcardCache();if (cache && cache.has(obj)) {return cache.get(obj);}var newObj = {};var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) {var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;if (desc && (desc.get || desc.set)) {Object.defineProperty(newObj, key, desc);} else {newObj[key] = obj[key];}}}newObj.default = obj;if (cache) {cache.set(obj, newObj);}return newObj;}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}
-_axios.default.defaults.adapter = function (config) {
-  return new Promise(function (resolve, reject) {
-    var settle = __webpack_require__(/*! axios/lib/core/settle */ 50);
-    var buildURL = __webpack_require__(/*! axios/lib/helpers/buildURL */ 34);
-    uni.request({
-      method: config.method.toUpperCase(),
-      url: config.baseURL + buildURL(config.url, config.params, config.paramsSerializer),
-      header: config.headers,
-      data: config.data,
-      dataType: config.dataType,
-      responseType: config.responseType,
-      sslVerify: config.sslVerify,
-      complete: function complete(response) {
-        response = {
-          data: response.data,
-          status: response.statusCode,
-          errMsg: response.errMsg,
-          header: response.header,
-          config: config };
-
-        settle(resolve, reject, response);
-      } });
-
-  });
-};var
-HttpRequest = /*#__PURE__*/function () {
-  function HttpRequest() {_classCallCheck(this, HttpRequest);
-    this.baseURL =  true ? 'https://api-hmugo-web.itheima.net/api/public/v1/' : undefined;
-    this.timeout = 5000;
-    this.queue = {};
-  }_createClass(HttpRequest, [{ key: "request", value: function request(
-
-    options) {
-      var instance = _axios.default.create();
-      this.setInterceptor(instance, options.url);
-      var config = _objectSpread(_objectSpread({},
-      options), {}, {
-        baseURL: this.baseURL,
-        timeout: this.timeout });
-
-      return instance(config);
-    } }, { key: "setInterceptor", value: function setInterceptor(
-
-    instance, url) {var _this = this;
-
-      instance.interceptors.request.use(function (config) {
-        if (Object.keys(_this.queue).length == 0) {
-          _index.default.commit(types.SET_GLOBAL_LOADING, true); // 开启loading
-        }
-        _this.queue[url] = true;
-        var CancelToken = _axios.default.CancelToken;
-        config.cancelToken = new CancelToken(function (c) {
-          _index.default.commit(types.ADD_REQUEST_TOKEN, c); // 将请求函数 推入全局
-        });
-
-        // ... 设置请求头
-        return config; // 最后将请求返回出去
-      });
-
-      instance.interceptors.response.use(function (result) {
-        delete _this.queue[url];
-        if (Object.keys(_this.queue).length == 0) {
-          _index.default.commit(types.SET_GLOBAL_LOADING, false); // 关闭loading
-        }
-        result = result.data;
-        var code = result.meta.status;
-        if (code == 200) {
-          return Promise.resolve(result);
-        } else {
-          switch (code) {
-            case 401:
-              return Promise.reject('权限过期，请重新登录');
-              break;
-            default:
-              break;}
-
-        }
-        console.log(result, code);
-      }, function (error) {
-        delete _this.queue[url];
-        console.log(error);
-        return Promise.reject(error);
-      });
-
-
-
-    } }, { key: "get", value: function get(
-
-    url) {var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      return this.request({
-        method: 'GET',
-        url: url,
-        params: params });
-
-    } }, { key: "post", value: function post(
-
-    url) {var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};var params = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-      return this.request({
-        method: 'POST',
-        url: url,
-        data: data,
-        params: params });
-
-    } }]);return HttpRequest;}();var _default =
-
-new HttpRequest();exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
+/* 27 */,
+/* 28 */,
 /* 29 */
 /*!**************************************************************************************************!*\
   !*** C:/Users/Sprite Master/Documents/HBuilderProjects/hello-uniapp/node_modules/axios/index.js ***!
@@ -15646,8 +15512,149 @@ module.exports = function isAxiosError(payload) {
 /* 82 */,
 /* 83 */,
 /* 84 */,
-/* 85 */,
-/* 86 */,
+/* 85 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Sprite Master/Documents/HBuilderProjects/hello-uniapp/api/home/index.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.getBundleList = getBundleList;var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request.js */ 86));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+function getBundleList() {
+  return _request.default.get('home/swiperdata');
+}
+
+// export default {getBundleList}
+
+/***/ }),
+/* 86 */
+/*!***************************************************************************************!*\
+  !*** C:/Users/Sprite Master/Documents/HBuilderProjects/hello-uniapp/utils/request.js ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ 29));
+var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index.js */ 13));
+var types = _interopRequireWildcard(__webpack_require__(/*! @/store/types.js */ 19));function _getRequireWildcardCache() {if (typeof WeakMap !== "function") return null;var cache = new WeakMap();_getRequireWildcardCache = function _getRequireWildcardCache() {return cache;};return cache;}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;}if (obj === null || typeof obj !== "object" && typeof obj !== "function") {return { default: obj };}var cache = _getRequireWildcardCache();if (cache && cache.has(obj)) {return cache.get(obj);}var newObj = {};var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) {var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;if (desc && (desc.get || desc.set)) {Object.defineProperty(newObj, key, desc);} else {newObj[key] = obj[key];}}}newObj.default = obj;if (cache) {cache.set(obj, newObj);}return newObj;}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}
+_axios.default.defaults.adapter = function (config) {
+  return new Promise(function (resolve, reject) {
+    var settle = __webpack_require__(/*! axios/lib/core/settle */ 50);
+    var buildURL = __webpack_require__(/*! axios/lib/helpers/buildURL */ 34);
+    uni.request({
+      method: config.method.toUpperCase(),
+      url: config.baseURL + buildURL(config.url, config.params, config.paramsSerializer),
+      header: config.headers,
+      data: config.data,
+      dataType: config.dataType,
+      responseType: config.responseType,
+      sslVerify: config.sslVerify,
+      complete: function complete(response) {
+        response = {
+          data: response.data,
+          status: response.statusCode,
+          errMsg: response.errMsg,
+          header: response.header,
+          config: config };
+
+        settle(resolve, reject, response);
+      } });
+
+  });
+};var
+HttpRequest = /*#__PURE__*/function () {
+  function HttpRequest() {_classCallCheck(this, HttpRequest);
+    this.baseURL =  true ? 'https://api-hmugo-web.itheima.net/api/public/v1/' : undefined;
+    this.timeout = 5000;
+    this.queue = {};
+  }_createClass(HttpRequest, [{ key: "request", value: function request(
+
+    options) {
+      var instance = _axios.default.create();
+      this.setInterceptor(instance, options.url);
+      var config = _objectSpread(_objectSpread({},
+      options), {}, {
+        baseURL: this.baseURL,
+        timeout: this.timeout });
+
+      return instance(config);
+    } }, { key: "setInterceptor", value: function setInterceptor(
+
+    instance, url) {var _this = this;
+
+      instance.interceptors.request.use(function (config) {
+        if (Object.keys(_this.queue).length == 0) {
+          _index.default.commit(types.SET_GLOBAL_LOADING, true); // 开启loading
+        }
+        _this.queue[url] = true;
+        var CancelToken = _axios.default.CancelToken;
+        config.cancelToken = new CancelToken(function (c) {
+          _index.default.commit(types.ADD_REQUEST_TOKEN, c); // 将请求函数 推入全局
+        });
+
+        // ... 设置请求头
+        return config; // 最后将请求返回出去
+      });
+
+      instance.interceptors.response.use(function (result) {
+        delete _this.queue[url];
+        if (Object.keys(_this.queue).length == 0) {
+          _index.default.commit(types.SET_GLOBAL_LOADING, false); // 关闭loading
+        }
+        result = result.data;
+        console.log(result);
+        var code = result.meta.status;
+
+        if (code == 200) {
+          return Promise.resolve(result);
+        } else {
+          switch (code) {
+            case 401:
+              return Promise.reject('权限过期，请重新登录');
+              break;
+            default:
+              break;}
+
+        }
+        console.log(result, code);
+      }, function (error) {
+        delete _this.queue[url];
+        if (Object.keys(_this.queue).length == 0) {
+          _index.default.commit(types.SET_GLOBAL_LOADING, false); // 关闭loading
+        }
+        uni.showToast({
+          title: error.message });
+
+        return Promise.reject(error);
+      });
+
+
+
+    } }, { key: "get", value: function get(
+
+    url) {var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      return this.request({
+        method: 'GET',
+        url: url,
+        params: params });
+
+    } }, { key: "post", value: function post(
+
+    url) {var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};var params = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return this.request({
+        method: 'POST',
+        url: url,
+        data: data,
+        params: params });
+
+    } }]);return HttpRequest;}();var _default =
+
+new HttpRequest();exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
 /* 87 */,
 /* 88 */,
 /* 89 */,
@@ -15681,7 +15688,7 @@ function clearnRequestFn() {
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _index = __webpack_require__(/*! utils/index.js */ 94);var _default =
 {
   onShow: function onShow() {
-    (0, _index.clearnRequestFn)();
+    // clearnRequestFn()
   } };exports.default = _default;
 
 /***/ })

@@ -67,6 +67,7 @@ class HttpRequest {
 			}
 			result = result.data
 			let code = result.meta.status
+			
 			if(code == 200) {
 				return Promise.resolve(result)
 			}else {
@@ -78,10 +79,14 @@ class HttpRequest {
 						break;
 				}
 			}
-			console.log(result,code);
 		}, error => {
 			delete this.queue[url]
-			console.log(error);
+			if (Object.keys(this.queue).length == 0) {
+				store.commit(types.SET_GLOBAL_LOADING, false) // 关闭loading
+			}
+			uni.showToast({
+				title:error.message
+			})
 			return Promise.reject(error)
 		})
 

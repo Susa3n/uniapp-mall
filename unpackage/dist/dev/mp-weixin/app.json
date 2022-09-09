@@ -2,23 +2,22 @@
   "pages": [
     "pages/index/index",
     "pages/message/message",
-    "pages/profile/profile",
-    "pages/detail/detail"
+    "pages/cart/cart",
+    "pages/profile/profile"
   ],
   "subPackages": [],
   "window": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "XX商城",
+    "navigationBarBackgroundColor": "#c41e00",
     "backgroundColor": "#F8F8F8",
     "backgroundTextStyle": "light",
     "enablePullDownRefresh": true
   },
   "tabBar": {
     "color": "#808080",
-    "selectedColor": "#00FFFF",
-    "backgroundColor": "#F5DEB3",
-    "borderStyle": "black",
+    "selectedColor": "#c41e00",
+    "borderStyle": "white",
     "position": "bottom",
     "list": [
       {
@@ -28,16 +27,22 @@
         "selectedIconPath": "static/icon/home-active.png"
       },
       {
-        "text": "信息",
+        "text": "咨询",
         "pagePath": "pages/message/message",
-        "iconPath": "static/tabs/message.png",
-        "selectedIconPath": "static/tabs/message-active.png"
+        "iconPath": "static/icon/news.png",
+        "selectedIconPath": "static/icon/news-active.png"
+      },
+      {
+        "text": "购物车",
+        "pagePath": "pages/cart/cart",
+        "iconPath": "static/icon/cart.png",
+        "selectedIconPath": "static/icon/cart-active.png"
       },
       {
         "text": "我的",
         "pagePath": "pages/profile/profile",
-        "iconPath": "static/tabs/contact.png",
-        "selectedIconPath": "static/tabs/contact-active.png"
+        "iconPath": "static/icon/member.png",
+        "selectedIconPath": "static/icon/member-active.png"
       }
     ]
   },
